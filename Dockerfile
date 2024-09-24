@@ -1,17 +1,6 @@
-# 使用 Node.js 作为基础镜像
-FROM node:14
+# 使用 nginx 來提供靜態 HTML 頁面
+FROM nginx:alpine
 
-# 创建并切换到工作目录
-WORKDIR /app
+# 將本地的 index.html 文件複製到 nginx 預設的 web 服務目錄
+COPY ./index.html /usr/share/nginx/html/index.html
 
-# 将当前目录下所有文件复制到容器中的 /app
-COPY . .
-
-# 安装依赖
-RUN npm install
-
-# 暴露应用的端口
-EXPOSE 3000
-
-# 启动应用
-CMD ["npm", "start"]
